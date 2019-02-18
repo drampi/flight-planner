@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.1.10" sequence="0" timestamp="1550487167089" analysisTimestamp="1550487167221" release="">
+  <Project projectName="">
+    <Jar>C:\Users\Erik\IdeaProjects\flightplanner\build\classes\java\main\io\codelex\flightplanner\FlightplannerApplication.class</Jar>
+    <AuxClasspathEntry>C:\Users\Erik\IdeaProjects\flightplanner\build\classes\java\main</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\IdeaProjects\flightplanner\build\resources\main</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-web\2.1.3.RELEASE\e65a0538c3075a0910e7273a9dbedb189761b1ae\spring-boot-starter-web-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-json\2.1.3.RELEASE\374c3de160f59ee2de2f78f2285ecc9b593caa71\spring-boot-starter-json-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter\2.1.3.RELEASE\bf73ada346b2956cbd10067830ac58aa55c46176\spring-boot-starter-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-tomcat\2.1.3.RELEASE\653f835a6da031622636379dca873be106aeddb4\spring-boot-starter-tomcat-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.hibernate.validator\hibernate-validator\6.0.14.Final\c424524aa7718c564d9199ac5892b05901cabae6\hibernate-validator-6.0.14.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-webmvc\5.1.5.RELEASE\236e3bfdbdc6c86629237a74f0f11414adb4e211\spring-webmvc-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-web\5.1.5.RELEASE\c37c4363be4ad6c5f67e3f9f020497e2d599e325\spring-web-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-autoconfigure\2.1.3.RELEASE\58e07f69638a3ca13dffe8a2b68d284af376d105\spring-boot-autoconfigure-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.1.3.RELEASE\92bb92cd73212cefc1e5112e3bbf1f31c154c3fd\spring-boot-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-logging\2.1.3.RELEASE\3ae3b090dfd65caa44e7fd12e433b68b48c24c99\spring-boot-starter-logging-2.1.3.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\javax.annotation\javax.annotation-api\1.3.2\934c04d3cfef185a8008e7bf34331b79730a9d43\javax.annotation-api-1.3.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-context\5.1.5.RELEASE\d39299241a2c8353d83f0f0c84d3677973da7c57\spring-context-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-aop\5.1.5.RELEASE\5e6ab23bc14369b0e29881afd85ad13b79846a0e\spring-aop-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-beans\5.1.5.RELEASE\58b10c61f6bf2362909d884813c4049b657735f5\spring-beans-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-expression\5.1.5.RELEASE\b728a06924560ee69307a52d100e6b156d9a4a80\spring-expression-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-core\5.1.5.RELEASE\aacc4555108f3da913a58114b2aebc819f58cce4\spring-core-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.yaml\snakeyaml\1.23\ec62d74fe50689c28c0ff5b35d3aebcaa8b5be68\snakeyaml-1.23.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\2.9.8\bcd02aa9195390e23747ed40bf76be869ad3a2fb\jackson-datatype-jdk8-2.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\2.9.8\28ad1bced632ba338e51c825a652f6e11a8e6eac\jackson-datatype-jsr310-2.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.module\jackson-module-parameter-names\2.9.8\c4eef0e6e20d60fb27af4bc4770dba7bcc3f6de6\jackson-module-parameter-names-2.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.9.8\11283f21cc480aa86c4df7a0a3243ec508372ed2\jackson-databind-2.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-websocket\9.0.16\f5eac487823c68f5d20742a99df1d94350c24d21\tomcat-embed-websocket-9.0.16.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-core\9.0.16\d7069e3d0f760035b26b68b7b6af5eaa0c1862f\tomcat-embed-core-9.0.16.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.apache.tomcat.embed\tomcat-embed-el\9.0.16\baadc5c97260023078f521cfc0085797f7dde91b\tomcat-embed-el-9.0.16.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\javax.validation\validation-api\2.0.1.Final\cb855558e6271b1b32e716d24cb85c7f583ce09e\validation-api-2.0.1.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.jboss.logging\jboss-logging\3.3.2.Final\3789d00e859632e6c6206adc0c71625559e6e3b0\jboss-logging-3.3.2.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml\classmate\1.4.0\291658ac2ce2476256c7115943652c0accb5c857\classmate-1.4.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\ch.qos.logback\logback-classic\1.2.3\7c4f3c474fb2c041d8028740440937705ebb473a\logback-classic-1.2.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-to-slf4j\2.11.2\6d37bf7b046c0ce2669f26b99365a2cfa45c4c18\log4j-to-slf4j-2.11.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.slf4j\jul-to-slf4j\1.7.25\af5364cd6679bfffb114f0dec8a157aaa283b76\jul-to-slf4j-1.7.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.springframework\spring-jcl\5.1.5.RELEASE\5cbd44d11a031c64c788edf1f99706b31c434469\spring-jcl-5.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.9.0\7c10d545325e3a6e72e06381afe469fd40eb701\jackson-annotations-2.9.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.9.8\f5a654e4675769c716e5b387830d19b501ca191\jackson-core-2.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\ch.qos.logback\logback-core\1.2.3\864344400c3d4d92dfeb0a305dc87d953677c03c\logback-core-1.2.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.slf4j\slf4j-api\1.7.25\da76ca59f6a57ee3102f8f9bd9cee742973efa8a\slf4j-api-1.7.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\Erik\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.11.2\f5e9a2ffca496057d6891a3de65128efc636e26e\log4j-api-2.11.2.jar</AuxClasspathEntry>
+    <SrcDir>C:\Users\Erik\IdeaProjects\flightplanner\src\main\java</SrcDir>
+    <SrcDir>C:\Users\Erik\IdeaProjects\flightplanner\src\main\java\io\codelex\flightplanner\FlightplannerApplication.java</SrcDir>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Mon, 18 Feb 2019 12:52:47 +0200" total_classes="1" referenced_classes="13" total_bugs="0" total_size="6" num_packages="1" java_version="1.8.0_192" vm_version="25.192-b12" cpu_seconds="7.94" clock_seconds="2.51" peak_mbytes="127.07" alloc_mbytes="1810.00" gc_seconds="0.05">
+    <PackageStats package="io.codelex.flightplanner" total_bugs="0" total_types="1" total_size="6">
+      <ClassStats class="io.codelex.flightplanner.FlightplannerApplication" sourceFile="FlightplannerApplication.java" interface="false" size="6" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="499" invocations="410" avgMicrosecondsPerInvocation="1218" maxMicrosecondsPerInvocation="16611" standardDeviationMicrosecondsPerInvocation="1087"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="316" invocations="408" avgMicrosecondsPerInvocation="776" maxMicrosecondsPerInvocation="19777" standardDeviationMicrosecondsPerInvocation="1725"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="186" invocations="2" avgMicrosecondsPerInvocation="93240" maxMicrosecondsPerInvocation="186153" standardDeviationMicrosecondsPerInvocation="92913"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="119" invocations="2" avgMicrosecondsPerInvocation="59971" maxMicrosecondsPerInvocation="119066" standardDeviationMicrosecondsPerInvocation="59095"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="83" invocations="13" avgMicrosecondsPerInvocation="6385" maxMicrosecondsPerInvocation="22246" standardDeviationMicrosecondsPerInvocation="8014"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="74" invocations="65" avgMicrosecondsPerInvocation="1145" maxMicrosecondsPerInvocation="23158" standardDeviationMicrosecondsPerInvocation="2876"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="66" invocations="376" avgMicrosecondsPerInvocation="177" maxMicrosecondsPerInvocation="3149" standardDeviationMicrosecondsPerInvocation="405"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="53" invocations="29" avgMicrosecondsPerInvocation="1845" maxMicrosecondsPerInvocation="26834" standardDeviationMicrosecondsPerInvocation="5006"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
