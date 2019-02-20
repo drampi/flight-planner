@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,36 +33,16 @@ class PublicTripsController {
     "arrival": "2019-02-27"
 }
      */
-    @PostMapping("/trips")
+    @PostMapping("/flights")
     public ResponseEntity<List<Trip>> findTrip(@RequestBody FindTripRequest request) {
         System.out.println(request.getFrom());
-        Trip trip1 = new Trip(
-                1L,
-                new Airport("Latvia" , "Riga", "RIX"),
-                new Airport("Sweden", "Stockholm", "ARN"),
-                "Norwegian"
-        );
-        Trip trip2 = new Trip(
-                2L,
-                new Airport("Latvia" , "Riga", "RIX"),
-                new Airport("Dubai", "UAE", "DBX"),
-                "Turkish Airlines"
-        );
-        List<Trip> trips = new ArrayList<>();
-        trips.add(trip1);
-        trips.add(trip2);
-        return new ResponseEntity<>(trips, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(request.getFrom(), HttpStatus.OK);
     }
 
-    @GetMapping("/trips/{id}")
-    public Trip findTripById(@PathVariable Long id) {
-        System.out.println(id);
-        return new Trip(
-                2L,
-                new Airport("Latvia" , "Riga", "RIX"),
-                new Airport("Dubai", "UAE", "DBX"),
-                "Turkish Airlines"
-        );
-
+    @GetMapping("/flights/{id}")
+    public ResponseEntity<Trip> findTripById(@PathVariable Long id) {
+        return tripService.findTripById(id)
+                .map(trip ->  new ResponseEntity<>(trip, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
