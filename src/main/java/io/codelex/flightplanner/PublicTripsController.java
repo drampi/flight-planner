@@ -35,8 +35,11 @@ class PublicTripsController {
      */
     @PostMapping("/flights")
     public ResponseEntity<List<Trip>> findTrip(@RequestBody FindTripRequest request) {
-        System.out.println(request.getFrom());
-        return new ResponseEntity(request.getFrom(), HttpStatus.OK);
+        if (request.getTo().equals(request.getFrom())) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+            return new ResponseEntity(tripService.findTrip(request), HttpStatus.OK);
+
     }
 
     @GetMapping("/flights/{id}")
