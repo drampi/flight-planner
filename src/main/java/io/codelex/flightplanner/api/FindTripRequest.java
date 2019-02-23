@@ -13,13 +13,14 @@ public class FindTripRequest {
     private LocalDate arrival;
     @JsonCreator
     public FindTripRequest(@JsonProperty("from") Airport from,
-                           @JsonProperty("to")Airport to,
-                           @JsonProperty("carrier")String carrier,
-                           @JsonProperty("departure")LocalDate departure,
-                           @JsonProperty("arrival")LocalDate arrival
-                         ) {
+                           @JsonProperty("to") Airport to,
+                           @JsonProperty("departure") LocalDate departure,
+                           @JsonProperty("arrival") LocalDate arrival
+    ) {
         this.from = from;
         this.to = to;
+        this.departure = departure;
+        this.arrival = arrival;
     }
 
     public String getCarrier() {

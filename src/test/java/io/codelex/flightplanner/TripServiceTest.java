@@ -134,10 +134,10 @@ public class TripServiceTest {
 
         //when
         Trip trip = service.addTrip(request);
-        Trip result = service.search();
+       // Trip result = service.search();
 
         //then
-        assertNotNull(result);
+        //assertNotNull(result);
 
         //and
         assertEqualsTripRequestProperly(request , trip);

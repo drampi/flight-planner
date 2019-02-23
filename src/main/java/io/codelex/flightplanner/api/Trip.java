@@ -1,5 +1,8 @@
 package io.codelex.flightplanner.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 
 public class Trip {
@@ -11,12 +14,13 @@ public class Trip {
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
 
-    public Trip(Long id,
-                Airport from,
-                Airport to,
-                String carrier,
-                LocalDateTime departureTime,
-                LocalDateTime arrivalTime) {
+    @JsonCreator
+    public Trip(@JsonProperty("id")Long id,
+                @JsonProperty("from")Airport from,
+                @JsonProperty("to")Airport to,
+                @JsonProperty("carrier")String carrier,
+                @JsonProperty("departureTime")LocalDateTime departureTime,
+                @JsonProperty("arrivalTime")LocalDateTime arrivalTime) {
         this.id = id;
         this.from = from;
         this.to = to;
