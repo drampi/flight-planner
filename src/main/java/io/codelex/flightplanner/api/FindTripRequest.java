@@ -11,6 +11,7 @@ public class FindTripRequest {
     private String carrier;
     private LocalDate departure;
     private LocalDate arrival;
+
     @JsonCreator
     public FindTripRequest(@JsonProperty("from") Airport from,
                            @JsonProperty("to") Airport to,

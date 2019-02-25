@@ -15,7 +15,7 @@ class InternalTripsController {
 
     @PutMapping("/flights")
     public ResponseEntity<Trip> addTrip(@RequestBody AddTripRequest request) {
-        return new ResponseEntity(tripService.addTrip(request),HttpStatus.CREATED);
+        return new ResponseEntity(tripService.addTrip(request), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/flights/{id}")

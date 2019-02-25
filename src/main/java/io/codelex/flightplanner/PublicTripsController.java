@@ -16,12 +16,12 @@ class PublicTripsController {
     private TripService tripService;
 
     @GetMapping("/flights/search")
-    public ResponseEntity<List<Trip>> search(@RequestParam("from") String from, @RequestParam("to")String to) {
+    public ResponseEntity<List<Trip>> search(@RequestParam("from") String from, @RequestParam("to") String to) {
         List<Trip> fromTo = tripService.search(from, to);
         if (tripService.search(from, to) == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(fromTo , HttpStatus.OK);
+        return new ResponseEntity(fromTo, HttpStatus.OK);
     }
 
     /*
@@ -41,7 +41,7 @@ class PublicTripsController {
         } else if (request.getFrom() == null || request.getTo() == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-            return new ResponseEntity(tripService.findTrip(request), HttpStatus.OK);
+        return new ResponseEntity(tripService.findTrip(request), HttpStatus.OK);
 
     }
 
@@ -50,6 +50,6 @@ class PublicTripsController {
         if (tripService.findTripById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(tripService.findTripById(id) , HttpStatus.OK);
+        return new ResponseEntity<>(tripService.findTripById(id), HttpStatus.OK);
     }
 }

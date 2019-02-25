@@ -15,12 +15,12 @@ public class Trip {
     private LocalDateTime arrivalTime;
 
     @JsonCreator
-    public Trip(@JsonProperty("id")Long id,
-                @JsonProperty("from")Airport from,
-                @JsonProperty("to")Airport to,
-                @JsonProperty("carrier")String carrier,
-                @JsonProperty("departureTime")LocalDateTime departureTime,
-                @JsonProperty("arrivalTime")LocalDateTime arrivalTime) {
+    public Trip(@JsonProperty("id") Long id,
+                @JsonProperty("from") Airport from,
+                @JsonProperty("to") Airport to,
+                @JsonProperty("carrier") String carrier,
+                @JsonProperty("departureTime") LocalDateTime departureTime,
+                @JsonProperty("arrivalTime") LocalDateTime arrivalTime) {
         this.id = id;
         this.from = from;
         this.to = to;

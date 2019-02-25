@@ -29,23 +29,23 @@ class TripService {
         } else {
             trips.add(trip);
         }
-       return trip;
+        return trip;
     }
 
     private boolean isTripPresent(AddTripRequest request) {
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
-                && trip.getTo().equals(request.getTo())
-                && trip.getCarrier().equals(request.getCarrier())
-                && trip.getDepartureTime().equals(request.getDepartureTime())
-                && trip.getArrivalTime().equals(request.getArrivalTime()))
+                    && trip.getTo().equals(request.getTo())
+                    && trip.getCarrier().equals(request.getCarrier())
+                    && trip.getDepartureTime().equals(request.getDepartureTime())
+                    && trip.getArrivalTime().equals(request.getArrivalTime()))
                 return true;
         }
         return false;
     }
 
     void deleteTripById(Long id) {
-        for (Trip trip:trips) {
+        for (Trip trip : trips) {
             if (trip.getId().equals(id)) {
                 trips.remove(trip);
                 break;
@@ -57,8 +57,8 @@ class TripService {
         trips.clear();
     }
 
-     Trip findTripById(Long id) {
-        for (Trip trip: trips) {
+    Trip findTripById(Long id) {
+        for (Trip trip : trips) {
             if (trip.getId().equals(id)) {
                 return trip;
             }
@@ -68,17 +68,17 @@ class TripService {
 
     List<Trip> findTrip(FindTripRequest request) {
         List<Trip> foundTrips = new ArrayList<>();
-        if(request.getFrom().equals(request.getTo())
+        if (request.getFrom().equals(request.getTo())
                 || request.getDeparture().equals(request.getArrival())) {
             return null;
         }
 
-        for (Trip trip: trips) {
-            if(trip.getFrom().equals(request.getFrom())
-                    &&trip.getTo().equals(request.getTo())
-                    &&trip.getDepartureTime().toLocalDate().equals(request.getDeparture())
-                    &&trip.getArrivalTime().toLocalDate().equals(request.getArrival())
-                    &&trip.getCarrier().equals(request.getCarrier())) {
+        for (Trip trip : trips) {
+            if (trip.getFrom().equals(request.getFrom())
+                    && trip.getTo().equals(request.getTo())
+                    && trip.getDepartureTime().toLocalDate().equals(request.getDeparture())
+                    && trip.getArrivalTime().toLocalDate().equals(request.getArrival())
+                    && trip.getCarrier().equals(request.getCarrier())) {
                 foundTrips.add(trip);
             }
         }
