@@ -18,7 +18,7 @@ class PublicTripsController {
     @GetMapping("/flights/search")
     public ResponseEntity<List<Trip>> search(@RequestParam("from") String from, @RequestParam("to")String to) {
         List<Trip> fromTo = tripService.search(from, to);
-        if (fromTo.isEmpty()) {
+        if (tripService.search(from, to) == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(fromTo , HttpStatus.OK);
@@ -37,14 +37,19 @@ class PublicTripsController {
     @PostMapping("/flights")
     public ResponseEntity<List<Trip>> findTrip(@RequestBody FindTripRequest request) {
         if (request.getTo().equals(request.getFrom())) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        } else if (request.getFrom() == null || request.getTo() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
             return new ResponseEntity(tripService.findTrip(request), HttpStatus.OK);
 
     }
 
     @GetMapping("/flights/{id}")
-    public Trip findTripById(@PathVariable Long id) {
-        return tripService.findTripById(id);
+    public ResponseEntity<Trip> findTripById(@PathVariable Long id) {
+        if (tripService.findTripById(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(tripService.findTripById(id) , HttpStatus.OK);
     }
 }

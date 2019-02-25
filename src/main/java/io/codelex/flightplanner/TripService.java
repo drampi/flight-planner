@@ -57,7 +57,7 @@ class TripService {
         trips.clear();
     }
 
-    public Trip findTripById(Long id) {
+     Trip findTripById(Long id) {
         for (Trip trip: trips) {
             if (trip.getId().equals(id)) {
                 return trip;
@@ -66,8 +66,23 @@ class TripService {
         return null;
     }
 
-    public List<Trip> findTrip(FindTripRequest request) {
-        return null;
+    List<Trip> findTrip(FindTripRequest request) {
+        List<Trip> foundTrips = new ArrayList<>();
+        if(request.getFrom().equals(request.getTo())
+                || request.getDeparture().equals(request.getArrival())) {
+            return null;
+        }
+
+        for (Trip trip: trips) {
+            if(trip.getFrom().equals(request.getFrom())
+                    &&trip.getTo().equals(request.getTo())
+                    &&trip.getDepartureTime().toLocalDate().equals(request.getDeparture())
+                    &&trip.getArrivalTime().toLocalDate().equals(request.getArrival())
+                    &&trip.getCarrier().equals(request.getCarrier())) {
+                foundTrips.add(trip);
+            }
+        }
+        return foundTrips;
     }
 
     List<Trip> search(String from, String to) {
