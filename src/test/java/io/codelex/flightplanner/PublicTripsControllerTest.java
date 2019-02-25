@@ -75,11 +75,11 @@ public class PublicTripsControllerTest {
     private TripService service;
 
     @Test
-    public void should_get_400_when_from_and_to_are_equal() throws  Exception {
+    public void should_get_400_when_from_and_to_are_equal() throws Exception {
         //given
         FindTripRequest request = new FindTripRequest(
-                new Airport("Latvia", "Riga" , "RIX"),
-                new Airport("Latvia", "Riga" , "RIX"),
+                new Airport("Latvia", "Riga", "RIX"),
+                new Airport("Latvia", "Riga", "RIX"),
                 LocalDate.now(),
                 LocalDate.now()
         );
@@ -88,20 +88,20 @@ public class PublicTripsControllerTest {
         //expect
         mockMvc.perform(
                 post("/api/flights")
-                            .content(json)
-                            .contentType(APPLICATION_JSON)
-                            .accept(APPLICATION_JSON))
+                        .content(json)
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest()
                 );
     }
 
     @Test
-    public void should_get_200_and_find_trips() throws  Exception {
+    public void should_get_200_and_find_trips() throws Exception {
         //given
         FindTripRequest request = new FindTripRequest(
-                new Airport("Latvia", "Riga" , "RIX"),
-                new Airport("Sweden", "Stockholm" , "ARN"),
+                new Airport("Latvia", "Riga", "RIX"),
+                new Airport("Sweden", "Stockholm", "ARN"),
                 LocalDate.now(),
                 LocalDate.now()
         );
@@ -132,7 +132,7 @@ public class PublicTripsControllerTest {
         List<Trip> trips = MAPPER.readValue(jsonResponse, new TypeReference<List<Trip>>() {
 
                 }
-                );
+        );
 
         //then
         assertFalse(trips.isEmpty());

@@ -25,11 +25,12 @@ public class TripServiceTest {
         //then
         assertEqualsTripRequestProperly(request, trip);
     }
+
     @Test
     public void should_increment_id_when_adding_new_flight() {
         //given
         AddTripRequest request = new AddTripRequest(
-                new Airport("Latvia", "Riga" , "RIX"),
+                new Airport("Latvia", "Riga", "RIX"),
                 new Airport("Sweden", "Stockholm", "APN"),
                 "Ryanair",
                 LocalDateTime.now(),
@@ -37,7 +38,7 @@ public class TripServiceTest {
         );
 
         AddTripRequest request1 = new AddTripRequest(
-                new Airport("England", "London" , "ALN"),
+                new Airport("England", "London", "ALN"),
                 new Airport("Sweden", "Stockholm", "APN"),
                 "Ryanair",
                 LocalDateTime.now(),
@@ -78,8 +79,8 @@ public class TripServiceTest {
         service.addTrip(request);
 
         //then
-       assertThrows(IllegalStateException.class,
-               () -> service.addTrip(request));
+        assertThrows(IllegalStateException.class,
+                () -> service.addTrip(request));
 
     }
 
@@ -106,7 +107,7 @@ public class TripServiceTest {
         //given
         AddTripRequest request = createRequest();
         AddTripRequest request1 = new AddTripRequest(
-                new Airport("Latvia", "Riga" , "RIX"),
+                new Airport("Latvia", "Riga", "RIX"),
                 new Airport("SW", "SH", "VVV"),
                 "Ryanair",
                 LocalDateTime.now(),
@@ -134,7 +135,7 @@ public class TripServiceTest {
 
         //then
 
-        assertNull(service.search(null , null));
+        assertNull(service.search(null, null));
     }
 
     @Test
@@ -146,7 +147,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String airport = "riX";
-        List<Trip> result = service.search (airport, "");
+        List<Trip> result = service.search(airport, "");
         //then
         assertTrue(result.contains(trip));
         //and
@@ -164,7 +165,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String country = "lAtViA";
-        List<Trip> result = service.search (country, "");
+        List<Trip> result = service.search(country, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -178,10 +179,11 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String city = "RIGA";
-        List<Trip> result = service.search (city, "");
+        List<Trip> result = service.search(city, "");
         //then
         assertTrue(result.contains(trip));
     }
+
     @Test
     public void should_find_flight_where_partial_airport_name_from_passed() {
         //given
@@ -191,7 +193,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String airport = "ri";
-        List<Trip> result = service.search (airport, "");
+        List<Trip> result = service.search(airport, "");
         //then
         assertTrue(result.contains(trip));
 
@@ -206,7 +208,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String country = "lat";
-        List<Trip> result = service.search (country, "");
+        List<Trip> result = service.search(country, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -220,7 +222,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String city = "ga";
-        List<Trip> result = service.search (city, "");
+        List<Trip> result = service.search(city, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -234,7 +236,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String airport = "rIx";
-        List<Trip> result = service.search (airport, "");
+        List<Trip> result = service.search(airport, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -248,7 +250,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String country = "lATVIA";
-        List<Trip> result = service.search (country, "");
+        List<Trip> result = service.search(country, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -262,7 +264,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String city = "Riga";
-        List<Trip> result = service.search (city, "");
+        List<Trip> result = service.search(city, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -276,7 +278,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String airport = "rix   ";
-        List<Trip> result = service.search (airport, "");
+        List<Trip> result = service.search(airport, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -290,7 +292,7 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String country = "latvia   ";
-        List<Trip> result = service.search (country, "");
+        List<Trip> result = service.search(country, "");
         //then
         assertTrue(result.contains(trip));
     }
@@ -304,14 +306,14 @@ public class TripServiceTest {
         Trip trip = service.addTrip(request);
 
         String city = "riga   ";
-        List<Trip> result = service.search (city, "");
+        List<Trip> result = service.search(city, "");
         //then
         assertTrue(result.contains(trip));
     }
 
     private AddTripRequest createRequest() {
-         return new AddTripRequest(
-                new Airport("Latvia", "Riga" , "RIX"),
+        return new AddTripRequest(
+                new Airport("Latvia", "Riga", "RIX"),
                 new Airport("Sweden", "Stockholm", "APN"),
                 "Ryanair",
                 LocalDateTime.now(),
