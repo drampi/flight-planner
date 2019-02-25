@@ -6,6 +6,7 @@ import io.codelex.flightplanner.api.Trip;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,9 +36,18 @@ public class TripServiceTest {
                 LocalDateTime.now().plusHours(1)
         );
 
+        AddTripRequest request1 = new AddTripRequest(
+                new Airport("England", "London" , "ALN"),
+                new Airport("Sweden", "Stockholm", "APN"),
+                "Ryanair",
+                LocalDateTime.now(),
+                LocalDateTime.now().plusHours(1)
+        );
+
+
         //when
         Trip firstTrip = service.addTrip(request);
-        Trip secondTrip = service.addTrip(request);
+        Trip secondTrip = service.addTrip(request1);
 
         //then
         assertEquals(firstTrip.getId() + 1, secondTrip.getId());
@@ -134,69 +144,169 @@ public class TripServiceTest {
 
         //when
         Trip trip = service.addTrip(request);
-       // Trip result = service.search();
 
+        String airport = "riX";
+        List<Trip> result = service.search (airport, "");
         //then
-        //assertNotNull(result);
-
+        assertTrue(result.contains(trip));
         //and
-        assertEqualsTripRequestProperly(request , trip);
+        //assertEqualsTripRequestProperly(request , trip);
 
     }
 
 
     @Test
     public void should_find_flight_where_full_country_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String country = "lAtViA";
+        List<Trip> result = service.search (country, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_full_city_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String city = "RIGA";
+        List<Trip> result = service.search (city, "");
+        //then
+        assertTrue(result.contains(trip));
     }
     @Test
     public void should_find_flight_where_partial_airport_name_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
+
+        //when
+        Trip trip = service.addTrip(request);
+
+        String airport = "ri";
+        List<Trip> result = service.search (airport, "");
+        //then
+        assertTrue(result.contains(trip));
 
     }
 
     @Test
     public void should_find_flight_where_partial_country_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String country = "lat";
+        List<Trip> result = service.search (country, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_city_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String city = "ga";
+        List<Trip> result = service.search (city, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_lowercase_airport_name_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String airport = "rIx";
+        List<Trip> result = service.search (airport, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_uppercase_country_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String country = "lATVIA";
+        List<Trip> result = service.search (country, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_uppercase_city_from_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String city = "Riga";
+        List<Trip> result = service.search (city, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_airport_name_from_with_space_at_the_end_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String airport = "rix   ";
+        List<Trip> result = service.search (airport, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_country_from_with_space_at_the_end_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String country = "latvia   ";
+        List<Trip> result = service.search (country, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     @Test
     public void should_find_flight_where_partial_city_from_with_space_at_the_end_passed() {
+        //given
+        AddTripRequest request = createRequest();
 
+        //when
+        Trip trip = service.addTrip(request);
+
+        String city = "riga   ";
+        List<Trip> result = service.search (city, "");
+        //then
+        assertTrue(result.contains(trip));
     }
 
     private AddTripRequest createRequest() {

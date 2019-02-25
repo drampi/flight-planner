@@ -4,6 +4,7 @@ import io.codelex.flightplanner.api.AddTripRequest;
 import io.codelex.flightplanner.api.FindTripRequest;
 import io.codelex.flightplanner.api.Trip;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +77,20 @@ class TripService {
             return null;
         }
 
+        from = StringUtils.trimAllWhitespace(from).toLowerCase();
+        to = StringUtils.trimAllWhitespace(to).toLowerCase();
+
         for (Trip trip : trips) {
-            if (trip.getFrom().getCity().equals(from)
-            && trip.getTo().getCity().equals(to)) {
+            if (trip.getFrom().getAirport().toLowerCase().contains(from)
+                    && trip.getTo().getAirport().toLowerCase().contains(to)) {
+                foundTrips.add(trip);
+            } else if (
+                    trip.getFrom().getCity().toLowerCase().contains(from)
+                            && trip.getTo().getCity().toLowerCase().contains(to)) {
+                foundTrips.add(trip);
+            } else if (
+                    trip.getFrom().getCountry().toLowerCase().contains(from)
+                            && trip.getTo().getCountry().toLowerCase().contains(to)) {
                 foundTrips.add(trip);
             }
         }
