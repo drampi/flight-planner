@@ -1,13 +1,17 @@
 package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.api.AddTripRequest;
+import io.codelex.flightplanner.api.Airport;
 import io.codelex.flightplanner.api.FindTripRequest;
 import io.codelex.flightplanner.api.Trip;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 class TripService {
@@ -69,10 +73,10 @@ class TripService {
     List<Trip> findTrip(FindTripRequest request) {
         List<Trip> foundTrips = new ArrayList<>();
         if (request.getFrom().equals(request.getTo())
-                || request.getDeparture().equals(request.getArrival())) {
+                || request.getDeparture().equals(request.getArrival())
+        ) {
             return null;
         }
-
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
                     && trip.getTo().equals(request.getTo())
@@ -83,7 +87,18 @@ class TripService {
             }
         }
         return foundTrips;
-    }
+    } 
+      /*  Airport from = request.getFrom();
+        Airport to = request.getTo();
+        LocalDate departure = request.getDeparture();
+        LocalDate arrival = request.getArrival();
+        return trips.stream()
+                .filter(it -> it.getFrom().equals(from))
+                .filter(it -> it.getTo().equals(to))
+                .filter(it -> it.getDepartureTime().toLocalDate().equals(departure))
+                .filter(it -> it.getArrivalTime().toLocalDate().equals(arrival))
+                .collect(Collectors.toList()); 
+    }*/
 
     List<Trip> search(String from, String to) {
         List<Trip> foundTrips = new ArrayList<>();
