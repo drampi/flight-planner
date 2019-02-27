@@ -36,7 +36,7 @@ class TripService {
         return trip;
     }
 
-    private boolean isTripPresent(AddTripRequest request) {
+    boolean isTripPresent(AddTripRequest request) {
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
                     && trip.getTo().equals(request.getTo())
