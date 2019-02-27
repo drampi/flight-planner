@@ -72,17 +72,12 @@ class TripService {
 
     List<Trip> findTrip(FindTripRequest request) {
         List<Trip> foundTrips = new ArrayList<>();
-        if (request.getFrom().equals(request.getTo())
-                || request.getDeparture().equals(request.getArrival())
-        ) {
-            return null;
-        }
+        
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
                     && trip.getTo().equals(request.getTo())
                     && trip.getDepartureTime().toLocalDate().equals(request.getDeparture())
-                    && trip.getArrivalTime().toLocalDate().equals(request.getArrival())
-                    && trip.getCarrier().equals(request.getCarrier())) {
+                    && trip.getArrivalTime().toLocalDate().equals(request.getArrival())) {
                 foundTrips.add(trip);
             }
         }
@@ -104,7 +99,7 @@ class TripService {
         List<Trip> foundTrips = new ArrayList<>();
         if (from == null
                 || to == null) {
-            return null;
+            return foundTrips;
         }
 
         from = StringUtils.trimAllWhitespace(from).toLowerCase();
