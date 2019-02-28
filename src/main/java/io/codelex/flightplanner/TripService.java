@@ -1,27 +1,24 @@
 package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.api.AddTripRequest;
-import io.codelex.flightplanner.api.Airport;
 import io.codelex.flightplanner.api.FindTripRequest;
 import io.codelex.flightplanner.api.Trip;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 class TripService {
     private final List<Trip> trips = new ArrayList<>();
-    private Long sequence = 0L;
+    private final AtomicLong id = new AtomicLong(0);
 
 
-    Trip addTrip(AddTripRequest request) {
+    synchronized Trip addTrip(AddTripRequest request) {
         Trip trip = new Trip(
-                sequence++,
+                id.incrementAndGet(),
                 request.getFrom(),
                 request.getTo(),
                 request.getCarrier(),
@@ -36,7 +33,7 @@ class TripService {
         return trip;
     }
 
-    boolean isTripPresent(AddTripRequest request) {
+    synchronized boolean isTripPresent(AddTripRequest request) {
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
                     && trip.getTo().equals(request.getTo())
@@ -48,15 +45,8 @@ class TripService {
         return false;
     }
 
-    void deleteTripById(Long id) {
+    synchronized void deleteTripById(Long id) {
         trips.removeIf(trip -> trip.getId().equals(id));
-        
-      /*  for (Trip trip : trips) {
-            if (trip.getId().equals(id)) {
-                trips.remove(trip);
-        
-            } 
-        }*/
     }
 
     void clearAll() {
@@ -74,7 +64,7 @@ class TripService {
 
     List<Trip> findTrip(FindTripRequest request) {
         List<Trip> foundTrips = new ArrayList<>();
-        
+
         for (Trip trip : trips) {
             if (trip.getFrom().equals(request.getFrom())
                     && trip.getTo().equals(request.getTo())
@@ -84,18 +74,7 @@ class TripService {
             }
         }
         return foundTrips;
-    } 
-      /*  Airport from = request.getFrom();
-        Airport to = request.getTo();
-        LocalDate departure = request.getDeparture();
-        LocalDate arrival = request.getArrival();
-        return trips.stream()
-                .filter(it -> it.getFrom().equals(from))
-                .filter(it -> it.getTo().equals(to))
-                .filter(it -> it.getDepartureTime().toLocalDate().equals(departure))
-                .filter(it -> it.getArrivalTime().toLocalDate().equals(arrival))
-                .collect(Collectors.toList()); 
-    }*/
+    }
 
     List<Trip> search(String from, String to) {
         List<Trip> foundTrips = new ArrayList<>();
@@ -123,11 +102,5 @@ class TripService {
         }
         return foundTrips;
     }
-
-    List<Trip> findAll() {
-        return null;
-    }
-
-
 }
 

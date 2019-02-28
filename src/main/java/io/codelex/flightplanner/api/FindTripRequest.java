@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class FindTripRequest {
     private Airport from;
     private Airport to;
-    private String carrier;
     private LocalDate departure;
     private LocalDate arrival;
 
@@ -22,10 +21,6 @@ public class FindTripRequest {
         this.to = to;
         this.departure = departure;
         this.arrival = arrival;
-    }
-
-    public String getCarrier() {
-        return carrier;
     }
 
     public LocalDate getDeparture() {

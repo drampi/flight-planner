@@ -15,9 +15,11 @@ class InternalTripsController {
 
     @PutMapping("/flights")
     public ResponseEntity<Trip> addTrip(@RequestBody AddTripRequest request) {
-        if(tripService.isTripPresent(request)){
+        if (tripService.isTripPresent(request)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }else if(request.getFrom() == null
+        }
+
+        if (request.getFrom() == null
                 || request.getTo() == null
                 || request.getCarrier() == null
                 || request.getTo().getAirport() == null
@@ -29,7 +31,9 @@ class InternalTripsController {
                 || request.getDepartureTime() == null
                 || request.getArrivalTime() == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else if(request.getTo().getAirport().equals("")
+        }
+
+        if (request.getTo().getAirport().equals("")
                 || request.getTo().getCountry().equals("")
                 || request.getTo().getCity().equals("")
                 || request.getCarrier().equals("")
@@ -37,22 +41,26 @@ class InternalTripsController {
                 || request.getFrom().getCountry().equals("")
                 || request.getFrom().getCity().equals("")) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else if(request.getFrom().equals(request.getTo())
+        }
+
+        if (request.getFrom().equals(request.getTo())
                 || request.getFrom().getAirport().toLowerCase().equals(request.getTo().getAirport().toLowerCase())
                 || request.getFrom().getCountry().toLowerCase().equals(request.getTo().getCountry().toLowerCase())
                 || request.getFrom().getCity().toLowerCase().equals(request.getTo().getCity().toLowerCase())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else if ((request.getDepartureTime().isAfter(request.getArrivalTime()))
-                ||  request.getDepartureTime().equals(request.getArrivalTime())){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else
-            return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
         }
-    
+
+        if ((request.getDepartureTime().isAfter(request.getArrivalTime()))
+                || request.getDepartureTime().equals(request.getArrivalTime())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
+    }
+
 
     @DeleteMapping("/flights/{id}")
     public void deleteTripById(@PathVariable("id") Long id) {
-        tripService.deleteTripById(id); 
+        tripService.deleteTripById(id);
     }
 
     @GetMapping("/flights/{id}")
