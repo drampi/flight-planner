@@ -40,17 +40,26 @@ class InternalTripsController {
         } else if(request.getFrom().equals(request.getTo())
                 || request.getFrom().getAirport().toLowerCase().equals(request.getTo().getAirport().toLowerCase())
                 || request.getFrom().getCountry().toLowerCase().equals(request.getTo().getCountry().toLowerCase())
-                || request.getFrom().getCity().toLowerCase().equals(request.getTo().getCity().toLowerCase())
-        ){
+                || request.getFrom().getCity().toLowerCase().equals(request.getTo().getCity().toLowerCase())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else {
+        } else if ((request.getDepartureTime().isAfter(request.getArrivalTime()))
+                ||  request.getDepartureTime().equals(request.getArrivalTime())){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else
             return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
         }
-    }
+    
 
     @DeleteMapping("/flights/{id}")
-    public ResponseEntity<Trip> deleteTripById(@PathVariable("id") Long id) {
-        tripService.deleteTripById(id);
-        return new ResponseEntity(id, HttpStatus.OK);
+    public void deleteTripById(@PathVariable("id") Long id) {
+        tripService.deleteTripById(id); 
+    }
+
+    @GetMapping("/flights/{id}")
+    public ResponseEntity<Trip> findTripById(@PathVariable Long id) {
+        if (tripService.findTripById(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(tripService.findTripById(id), HttpStatus.OK);
     }
 }

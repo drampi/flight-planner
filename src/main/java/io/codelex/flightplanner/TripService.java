@@ -49,12 +49,14 @@ class TripService {
     }
 
     void deleteTripById(Long id) {
-        for (Trip trip : trips) {
+        trips.removeIf(trip -> trip.getId().equals(id));
+        
+      /*  for (Trip trip : trips) {
             if (trip.getId().equals(id)) {
                 trips.remove(trip);
-                break;
-            }
-        }
+        
+            } 
+        }*/
     }
 
     void clearAll() {
