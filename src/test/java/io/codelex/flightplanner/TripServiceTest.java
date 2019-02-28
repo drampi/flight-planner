@@ -132,10 +132,9 @@ public class TripServiceTest {
 
         //when
         service.addTrip(request);
-
         //then
 
-        assertNull(service.search(null, null));
+        assertTrue(service.search(null, null).isEmpty());
     }
 
     @Test

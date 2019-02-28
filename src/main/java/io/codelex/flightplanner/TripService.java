@@ -5,6 +5,7 @@ import io.codelex.flightplanner.api.FindTripRequest;
 import io.codelex.flightplanner.api.Trip;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,9 @@ class TripService {
 
 
     synchronized Trip addTrip(AddTripRequest request) {
+        if (isTripPresent(request)) {
+            throw new IllegalStateException();
+        }
         Trip trip = new Trip(
                 id.incrementAndGet(),
                 request.getFrom(),
@@ -25,18 +29,14 @@ class TripService {
                 request.getDepartureTime(),
                 request.getArrivalTime()
         );
-        if (isTripPresent(request)) {
-            throw new IllegalStateException();
-        } else {
-            trips.add(trip);
-        }
+        trips.add(trip);
         return trip;
     }
 
     synchronized boolean isTripPresent(AddTripRequest request) {
         for (Trip trip : trips) {
-            if (trip.getFrom().equals(request.getFrom())
-                    && trip.getTo().equals(request.getTo())
+            if (trip.getFrom().getAirport().equals(request.getFrom().getAirport())
+                    && trip.getTo().getAirport().equals(request.getTo().getAirport())
                     && trip.getCarrier().equals(request.getCarrier())
                     && trip.getDepartureTime().equals(request.getDepartureTime())
                     && trip.getArrivalTime().equals(request.getArrivalTime()))
@@ -49,11 +49,11 @@ class TripService {
         trips.removeIf(trip -> trip.getId().equals(id));
     }
 
-    void clearAll() {
+    synchronized void clearAll() {
         trips.clear();
     }
 
-    Trip findTripById(Long id) {
+    synchronized Trip findTripById(Long id) {
         for (Trip trip : trips) {
             if (trip.getId().equals(id)) {
                 return trip;
@@ -62,7 +62,7 @@ class TripService {
         return null;
     }
 
-    List<Trip> findTrip(FindTripRequest request) {
+    synchronized List<Trip> findTrip(FindTripRequest request) {
         List<Trip> foundTrips = new ArrayList<>();
 
         for (Trip trip : trips) {
@@ -76,7 +76,7 @@ class TripService {
         return foundTrips;
     }
 
-    List<Trip> search(String from, String to) {
+    synchronized List<Trip> search(@RequestParam String from, String to) {
         List<Trip> foundTrips = new ArrayList<>();
         if (from == null
                 || to == null) {

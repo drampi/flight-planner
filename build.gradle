@@ -9,6 +9,13 @@ checkstyle {
 	toolVersion = '8.17'
 }
 
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+}
+
 apply plugin: 'io.spring.dependency-management'
 
 group = 'io.codelex'

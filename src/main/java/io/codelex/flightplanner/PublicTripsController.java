@@ -18,9 +18,6 @@ class PublicTripsController {
     @GetMapping("/flights/search")
     public ResponseEntity<List<Trip>> search(@RequestParam(value = "from", required = false) String from, @RequestParam(value = "to", required = false) String to) {
         List<Trip> fromTo = tripService.search(from, to);
-        if (fromTo == null) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
         return new ResponseEntity<>(fromTo, HttpStatus.OK);
     }
     
