@@ -45,7 +45,6 @@ class InternalTripsController {
 
         if (request.getFrom().equals(request.getTo())
                 || request.getFrom().getAirport().toLowerCase().equals(request.getTo().getAirport().toLowerCase())
-                || request.getFrom().getCountry().toLowerCase().equals(request.getTo().getCountry().toLowerCase())
                 || request.getFrom().getCity().toLowerCase().equals(request.getTo().getCity().toLowerCase())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
