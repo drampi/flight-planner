@@ -67,6 +67,6 @@ class InternalTripsController {
         if (tripService.findTripById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(tripService.findTripById(id), HttpStatus.OK);
+        return new ResponseEntity(tripService.findTripById(id), HttpStatus.OK);
     }
 }

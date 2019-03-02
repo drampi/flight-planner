@@ -1,18 +1,20 @@
-package io.codelex.flightplanner;
+package io.codelex.flightplanner.inmemory;
 
 import io.codelex.flightplanner.api.AddTripRequest;
 import io.codelex.flightplanner.api.Airport;
 import io.codelex.flightplanner.api.Trip;
+import io.codelex.flightplanner.inmemory.InMemoryTripService;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TripServiceTest {
-    TripService service = new TripService();
+public class InMemoryTripServiceTest {
+    InMemoryTripService service = new InMemoryTripService();
 
     @Test
     public void should_be_able_to_add_flight() {
@@ -61,7 +63,7 @@ public class TripServiceTest {
 
         //when
         Trip trip = service.addTrip(request);
-        Trip result = service.findTripById(trip.getId());
+        Optional<Trip> result = service.findTripById(trip.getId());
 
         //then
         assertNotNull(result);
@@ -94,11 +96,11 @@ public class TripServiceTest {
         AddTripRequest request = createRequest();
 
         //when
-        Trip trip = service.addTrip(request);
-        service.deleteTripById(trip.getId());
+        Optional<Trip> trip = Optional.ofNullable(service.addTrip(request));
+        service.deleteTripById(trip.get().getId());
 
         //then
-        trip = service.findTripById(trip.getId());
+        trip = service.findTripById(trip.get().getId());
         assertNull(trip);
     }
 
@@ -114,13 +116,13 @@ public class TripServiceTest {
                 LocalDateTime.now().plusHours(1)
         );
         //when
-        Trip trip = service.addTrip(request);
-        Trip trip1 = service.addTrip(request1);
+        Optional<Trip> trip = Optional.ofNullable(service.addTrip(request));
+        Optional<Trip> trip1 = Optional.ofNullable(service.addTrip(request1));
         service.clearAll();
 
         //then
-        trip = service.findTripById(trip.getId());
-        trip1 = service.findTripById(trip1.getId());
+        trip = service.findTripById(trip.get().getId());
+        trip1 = service.findTripById(trip1.get().getId());
         assertNull(trip);
         assertNull(trip1);
     }
