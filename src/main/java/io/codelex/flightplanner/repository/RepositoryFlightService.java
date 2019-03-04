@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -54,7 +53,7 @@ class RepositoryFlightService implements TripService {
 
     @Override
     public boolean isTripPresent(AddTripRequest request) {
-        return false;
+        return flightRecordRepository.isTripPresent(request.getFrom().getAirport(), request.getTo().getAirport(), request.getDepartureTime(), request.getArrivalTime(), request.getCarrier());
     }
 
     @Override
@@ -68,14 +67,24 @@ class RepositoryFlightService implements TripService {
     }
 
     @Override
-    public Optional<Trip> findTripById(Long id) {
+    public Trip findTripById(Long id) {
         return flightRecordRepository.findById(id)
-                .map(toFlight);
+                .map(toFlight)
+                .orElse(null);
     }
 
     @Override
     public List<Trip> findTrip(FindTripRequest request) {
-        return null;
+        return flightRecordRepository.findMatching(
+                request.getFrom().getAirport(),
+                request.getTo().getAirport(),
+                request.getDeparture().atStartOfDay(),
+                request.getDeparture().atStartOfDay().plusDays(1),
+                request.getArrival().atStartOfDay(),
+                request.getArrival().atStartOfDay().plusDays(1)
+        ).stream()
+                .map(toFlight)
+                .collect(Collectors.toList());
     }
 
     @Override

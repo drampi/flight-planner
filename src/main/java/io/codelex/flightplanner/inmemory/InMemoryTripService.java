@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component
@@ -61,10 +60,10 @@ class InMemoryTripService implements TripService {
     }
 
     @Override
-    public synchronized Optional<Trip> findTripById(Long id) {
-        for (Trip trip : trips) {
+    public synchronized Trip findTripById(Long id) {
+        for (Trip trip: trips) {
             if (trip.getId().equals(id)) {
-                return Optional.of(trip);
+                return trip;
             }
         }
         return null;

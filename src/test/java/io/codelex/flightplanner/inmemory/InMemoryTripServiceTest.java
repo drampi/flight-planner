@@ -3,7 +3,6 @@ package io.codelex.flightplanner.inmemory;
 import io.codelex.flightplanner.api.AddTripRequest;
 import io.codelex.flightplanner.api.Airport;
 import io.codelex.flightplanner.api.Trip;
-import io.codelex.flightplanner.inmemory.InMemoryTripService;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -63,7 +62,7 @@ public class InMemoryTripServiceTest {
 
         //when
         Trip trip = service.addTrip(request);
-        Optional<Trip> result = service.findTripById(trip.getId());
+        Trip result = service.findTripById(trip.getId());
 
         //then
         assertNotNull(result);
@@ -96,11 +95,11 @@ public class InMemoryTripServiceTest {
         AddTripRequest request = createRequest();
 
         //when
-        Optional<Trip> trip = Optional.ofNullable(service.addTrip(request));
-        service.deleteTripById(trip.get().getId());
+        Trip trip = service.addTrip(request);
+        service.deleteTripById(trip.getId());
 
         //then
-        trip = service.findTripById(trip.get().getId());
+        trip = service.findTripById(trip.getId());
         assertNull(trip);
     }
 
@@ -116,13 +115,13 @@ public class InMemoryTripServiceTest {
                 LocalDateTime.now().plusHours(1)
         );
         //when
-        Optional<Trip> trip = Optional.ofNullable(service.addTrip(request));
-        Optional<Trip> trip1 = Optional.ofNullable(service.addTrip(request1));
+        Trip trip = service.addTrip(request);
+        Trip trip1 = service.addTrip(request1);
         service.clearAll();
 
         //then
-        trip = service.findTripById(trip.get().getId());
-        trip1 = service.findTripById(trip1.get().getId());
+        trip = service.findTripById(trip.getId());
+        trip1 = service.findTripById(trip1.getId());
         assertNull(trip);
         assertNull(trip1);
     }

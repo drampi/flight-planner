@@ -4,7 +4,6 @@ import io.codelex.flightplanner.api.AddTripRequest;
 import io.codelex.flightplanner.api.FindTripRequest;
 import io.codelex.flightplanner.api.Trip;
 import java.util.List;
-import java.util.Optional;
 
 public interface TripService {
     Trip addTrip(AddTripRequest request);
@@ -15,7 +14,7 @@ public interface TripService {
 
     void clearAll();
 
-    Optional<Trip> findTripById(Long id);
+    Trip findTripById(Long id);
 
     List<Trip> findTrip(FindTripRequest request);
 

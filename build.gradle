@@ -37,6 +37,7 @@ dependencies {
 	testImplementation 'org.testcontainers:postgresql:1.10.6'
 	testImplementation 'org.testcontainers:junit-jupiter:1.10.6'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+	implementation 'org.liquibase:liquibase-core:3.6.3'
 }
 
 test {
