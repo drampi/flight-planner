@@ -8,7 +8,7 @@ spring:
       ddl-auto: create
   liquibase:
     change-log: classpath:/liquibase/updates.xml
-    enabled: false
+    enabled: true
 
 
 flight-planner:
