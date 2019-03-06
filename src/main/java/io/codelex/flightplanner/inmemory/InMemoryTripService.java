@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component
-@ConditionalOnProperty(prefix = "flight-planner", name ="store-type", havingValue = "in-memory")
+@ConditionalOnProperty(prefix = "flight-planner", name = "store-type", havingValue = "in-memory")
 class InMemoryTripService implements TripService {
     private final List<Trip> trips = new ArrayList<>();
     private final AtomicLong id = new AtomicLong(0);
@@ -61,7 +61,7 @@ class InMemoryTripService implements TripService {
 
     @Override
     public synchronized Trip findTripById(Long id) {
-        for (Trip trip: trips) {
+        for (Trip trip : trips) {
             if (trip.getId().equals(id)) {
                 return trip;
             }

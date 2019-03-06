@@ -29,7 +29,7 @@
             <column
                     name="id"
                     type="bigint"
-                    defaultValueSequenceNext=""
+                    defaultValueSequenceNext="flights_seq"
             >
                 <constraints
                         primaryKey="true"
@@ -37,11 +37,11 @@
                         primaryKeyName="pk_flights"
                 />
             </column>
-            <column name="airport_from"
+            <column name="from_airport"
                     type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="airport_to"
+            <column name="to_airport"
                     type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
@@ -58,5 +58,34 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addForeignKeyConstraint baseTableName="flights"
+                                 baseColumnNames="from_airport"
+                                 constraintName="fk_flights_airportFrom_airports_airport"
+                                 referencedTableName="airports"
+                                 referencedColumnNames="airport"
+        />
+        <createIndex
+                tableName="flights"
+                indexName="idx_flights_airportFrom"
+        >
+            <column name="from_airport"/>
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="flights"
+                                 baseColumnNames="to_airport"
+                                 constraintName="fk_flights_airportTo_airports_airport"
+                                 referencedTableName="airports"
+                                 referencedColumnNames="airport"
+                                 onDelete="CASCADE"
+        />
+        <createIndex
+                tableName="flights"
+                indexName="idx_flights_airportTo"
+        >
+            <column name="to_airport"/>
+        </createIndex>
+        <addUniqueConstraint tableName="flights"
+                             columnNames="from_airport,to_airport,departure_time,arrival_time,carrier"
+                             constraintName="unq_flights_airportFrom_airportTo_departureTime_arrivalTime_carrier"
+        />
     </changeSet>
 </databaseChangeLog>

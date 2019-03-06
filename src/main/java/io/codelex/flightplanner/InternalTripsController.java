@@ -15,10 +15,6 @@ class InternalTripsController {
 
     @PutMapping("/flights")
     public ResponseEntity<Trip> addTrip(@RequestBody AddTripRequest request) {
-        if (tripService.isTripPresent(request)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-
         if (request.getFrom() == null
                 || request.getTo() == null
                 || request.getCarrier() == null
@@ -33,13 +29,13 @@ class InternalTripsController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (request.getTo().getAirport().equals("")
-                || request.getTo().getCountry().equals("")
-                || request.getTo().getCity().equals("")
-                || request.getCarrier().equals("")
-                || request.getFrom().getAirport().equals("")
-                || request.getFrom().getCountry().equals("")
-                || request.getFrom().getCity().equals("")) {
+        if (request.getTo().getAirport().length() == 0
+                || request.getTo().getCountry().length() == 0
+                || request.getTo().getCity().length() == 0
+                || request.getCarrier().length() == 0
+                || request.getFrom().getAirport().length() == 0
+                || request.getFrom().getCountry().length() == 0
+                || request.getFrom().getCity().length() == 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -53,6 +49,10 @@ class InternalTripsController {
                 || request.getDepartureTime().equals(request.getArrivalTime())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        if (tripService.isTripPresent(request)) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
         return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
     }
 

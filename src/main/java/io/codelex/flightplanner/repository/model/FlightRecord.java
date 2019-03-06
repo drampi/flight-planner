@@ -10,13 +10,10 @@ public class FlightRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
     @ManyToOne()
     private AirportRecord from;
-
     @ManyToOne()
     private AirportRecord to;
-
     private String carrier;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;

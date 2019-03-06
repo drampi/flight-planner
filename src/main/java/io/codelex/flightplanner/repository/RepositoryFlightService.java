@@ -8,6 +8,7 @@ import io.codelex.flightplanner.api.Trip;
 import io.codelex.flightplanner.repository.model.AirportRecord;
 import io.codelex.flightplanner.repository.model.FlightRecord;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,14 +30,15 @@ class RepositoryFlightService implements TripService {
     @Override
     public Trip addTrip(AddTripRequest request) {
         FlightRecord flightRecord = new FlightRecord();
+
         flightRecord.setFrom(createOrGetAirport(request.getFrom()));
-        flightRecord.setFrom(createOrGetAirport(request.getTo()));
+        flightRecord.setTo(createOrGetAirport(request.getTo()));
         flightRecord.setCarrier(request.getCarrier());
         flightRecord.setDepartureTime(request.getDepartureTime());
         flightRecord.setArrivalTime(request.getArrivalTime());
 
         flightRecordRepository.save(flightRecord);
-        return null;
+        return toFlight.apply(flightRecord);
     }
 
     private AirportRecord createOrGetAirport(Airport airport) {
@@ -53,12 +55,20 @@ class RepositoryFlightService implements TripService {
 
     @Override
     public boolean isTripPresent(AddTripRequest request) {
-        return flightRecordRepository.isTripPresent(request.getFrom().getAirport(), request.getTo().getAirport(), request.getDepartureTime(), request.getArrivalTime(), request.getCarrier());
+        return flightRecordRepository.isTripPresent(
+                request.getFrom().getAirport(),
+                request.getTo().getAirport(),
+                request.getDepartureTime(),
+                request.getArrivalTime(),
+                request.getCarrier());
     }
 
     @Override
     public void deleteTripById(Long id) {
-        flightRecordRepository.deleteById(id);
+        try {
+            flightRecordRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ignored) {
+        }
     }
 
     @Override
@@ -89,6 +99,20 @@ class RepositoryFlightService implements TripService {
 
     @Override
     public List<Trip> search(String from, String to) {
+        if (from == null || from.isEmpty()) {
+            return flightRecordRepository.searchFlightsTo(to)
+                    .stream()
+                    .map(toFlight)
+                    .collect(Collectors.toList());
+        }
+
+        if (to == null || to.isEmpty()) {
+            return flightRecordRepository.searchFlightsFrom(from)
+                    .stream()
+                    .map(toFlight)
+                    .collect(Collectors.toList());
+        }
+
         return flightRecordRepository.searchFlights(from, to)
                 .stream()
                 .map(toFlight)
