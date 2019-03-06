@@ -46,4 +46,158 @@ class FlightRecordRepositoryTest {
         //then
         Assertions.assertTrue(flights.isEmpty());
     }
+
+    @Test
+    void search_from_should_find_flight_by_city() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsFrom("Riga");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_from_should_find_flight_by_airport() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsFrom("RIX");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_from_should_find_flight_by_country() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsFrom("LV");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_to_should_find_flight_by_city() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsTo("Dubai");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_to_should_find_flight_by_airport() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsTo("DXB");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_to_should_find_flight_by_country() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsTo("UAE");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
+
+    @Test
+    void search_from_should_find_flight_by_partial_city() {
+        //given
+        AirportRecord RIX = airportRecordRepository.save(new AirportRecord("RIX", "Riga", "LV"));
+        AirportRecord DXB = airportRecordRepository.save(new AirportRecord("DXB", "Dubai", "UAE"));
+
+
+        FlightRecord flight = new FlightRecord();
+        flight.setFrom(RIX);
+        flight.setTo(DXB);
+        flight.setCarrier("Turkish Airlines");
+        flight.setDepartureTime(LocalDate.of(2019, 1, 1).atStartOfDay());
+        flight.setArrivalTime(LocalDate.of(2019, 1, 2).atStartOfDay());
+        repository.save(flight);
+
+        //when
+        List<FlightRecord> flights = repository.searchFlightsFrom("Ri");
+
+        //then
+        Assertions.assertTrue(flights.contains(flight));
+    }
 }
