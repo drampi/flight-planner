@@ -15,27 +15,17 @@ class InternalTripsController {
 
     @PutMapping("/flights")
     public ResponseEntity<Trip> addTrip(@RequestBody AddTripRequest request) {
-        if (request.getFrom() == null
-                || request.getTo() == null
-                || request.getCarrier() == null
-                || request.getTo().getAirport() == null
-                || request.getTo().getCity() == null
-                || request.getTo().getCountry() == null
-                || request.getFrom().getCountry() == null
-                || request.getFrom().getCity() == null
-                || request.getFrom().getAirport() == null
-                || request.getDepartureTime() == null
-                || request.getArrivalTime() == null) {
+        if (isRequestNull(request)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (request.getTo().getAirport().length() == 0
-                || request.getTo().getCountry().length() == 0
-                || request.getTo().getCity().length() == 0
-                || request.getCarrier().length() == 0
-                || request.getFrom().getAirport().length() == 0
-                || request.getFrom().getCountry().length() == 0
-                || request.getFrom().getCity().length() == 0) {
+        if (isGetToLengthEmpty(request)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (request.getCarrier().length() == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (isGetFromLengthEmpty(request)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -56,6 +46,32 @@ class InternalTripsController {
         return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
     }
 
+    private boolean isGetFromLengthEmpty(AddTripRequest request) {
+        return request.getFrom().getAirport().length() == 0
+                || request.getFrom().getCountry().length() == 0
+                || request.getFrom().getCity().length() == 0;
+    }
+
+    private boolean isGetToLengthEmpty(AddTripRequest request) {
+        return request.getTo().getAirport().length() == 0
+                || request.getTo().getCountry().length() == 0
+                || request.getTo().getCity().length() == 0;
+    }
+
+    private boolean isRequestNull(AddTripRequest request) {
+        return request.getFrom() == null
+                || request.getTo() == null
+                || request.getCarrier() == null
+                || request.getTo().getAirport() == null
+                || request.getTo().getCity() == null
+                || request.getTo().getCountry() == null
+                || request.getFrom().getCountry() == null
+                || request.getFrom().getCity() == null
+                || request.getFrom().getAirport() == null
+                || request.getDepartureTime() == null
+                || request.getArrivalTime() == null;
+    }
+
 
     @DeleteMapping("/flights/{id}")
     public void deleteTripById(@PathVariable("id") Long id) {
@@ -67,6 +83,6 @@ class InternalTripsController {
         if (tripService.findTripById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(tripService.findTripById(id), HttpStatus.OK);
+        return new ResponseEntity<>(tripService.findTripById(id), HttpStatus.OK);
     }
 }
