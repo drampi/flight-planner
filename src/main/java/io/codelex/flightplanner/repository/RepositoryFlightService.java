@@ -29,6 +29,15 @@ class RepositoryFlightService implements TripService {
 
     @Override
     public Trip addTrip(AddTripRequest request) {
+        if(flightRecordRepository.isTripPresent(
+                request.getFrom().getAirport(),
+                request.getTo().getAirport(),
+                request.getDepartureTime(),
+                request.getArrivalTime(),
+                request.getCarrier())) {
+            throw new IllegalStateException();
+        }
+        
         FlightRecord flightRecord = new FlightRecord();
 
         flightRecord.setFrom(createOrGetAirport(request.getFrom()));
