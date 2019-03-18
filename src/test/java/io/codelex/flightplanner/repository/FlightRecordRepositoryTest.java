@@ -1,7 +1,5 @@
 package io.codelex.flightplanner.repository;
 
-import io.codelex.flightplanner.repository.AirportRecordRepository;
-import io.codelex.flightplanner.repository.FlightRecordRepository;
 import io.codelex.flightplanner.repository.model.AirportRecord;
 import io.codelex.flightplanner.repository.model.FlightRecord;
 import org.jetbrains.annotations.NotNull;
