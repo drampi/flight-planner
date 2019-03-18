@@ -60,8 +60,7 @@ public class RepositoryFlightServiceTest {
         //then
         Assertions.assertThrows(IllegalStateException.class, () -> service.addTrip(request));
     }
-
-
+    
     @Test
     public void should_find_flight_by_id() {
         //given
