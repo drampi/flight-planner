@@ -15,31 +15,17 @@ class InternalTripsController {
 
     @PutMapping("/flights")
     public ResponseEntity<Trip> addTrip(@RequestBody AddTripRequest request) {
-        if (tripService.isTripPresent(request)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-
-        if (request.getFrom() == null
-                || request.getTo() == null
-                || request.getCarrier() == null
-                || request.getTo().getAirport() == null
-                || request.getTo().getCity() == null
-                || request.getTo().getCountry() == null
-                || request.getFrom().getCountry() == null
-                || request.getFrom().getCity() == null
-                || request.getFrom().getAirport() == null
-                || request.getDepartureTime() == null
-                || request.getArrivalTime() == null) {
+        if (isRequestNull(request)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (request.getTo().getAirport().equals("")
-                || request.getTo().getCountry().equals("")
-                || request.getTo().getCity().equals("")
-                || request.getCarrier().equals("")
-                || request.getFrom().getAirport().equals("")
-                || request.getFrom().getCountry().equals("")
-                || request.getFrom().getCity().equals("")) {
+        if (isGetToLengthEmpty(request)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (request.getCarrier().length() == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (isGetFromLengthEmpty(request)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -53,7 +39,37 @@ class InternalTripsController {
                 || request.getDepartureTime().equals(request.getArrivalTime())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        if (tripService.isTripPresent(request)) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
         return new ResponseEntity<>(tripService.addTrip(request), HttpStatus.CREATED);
+    }
+
+    private boolean isGetFromLengthEmpty(AddTripRequest request) {
+        return request.getFrom().getAirport().length() == 0
+                || request.getFrom().getCountry().length() == 0
+                || request.getFrom().getCity().length() == 0;
+    }
+
+    private boolean isGetToLengthEmpty(AddTripRequest request) {
+        return request.getTo().getAirport().length() == 0
+                || request.getTo().getCountry().length() == 0
+                || request.getTo().getCity().length() == 0;
+    }
+
+    private boolean isRequestNull(AddTripRequest request) {
+        return request.getFrom() == null
+                || request.getTo() == null
+                || request.getCarrier() == null
+                || request.getTo().getAirport() == null
+                || request.getTo().getCity() == null
+                || request.getTo().getCountry() == null
+                || request.getFrom().getCountry() == null
+                || request.getFrom().getCity() == null
+                || request.getFrom().getAirport() == null
+                || request.getDepartureTime() == null
+                || request.getArrivalTime() == null;
     }
 
 

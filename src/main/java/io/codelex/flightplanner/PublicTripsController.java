@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -16,8 +17,14 @@ class PublicTripsController {
     private TripService tripService;
 
     @GetMapping("/flights/search")
-    public ResponseEntity<List<Trip>> search(@RequestParam(value = "from", required = false) String from, @RequestParam(value = "to", required = false) String to) {
+    public ResponseEntity<List<Trip>> search(@RequestParam(value = "from", required = false) String from,
+                                             @RequestParam(value = "to", required = false) String to) {
+        if (from == null
+                || to == null) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
         List<Trip> fromTo = tripService.search(from, to);
+
         return new ResponseEntity<>(fromTo, HttpStatus.OK);
     }
     
@@ -57,6 +64,6 @@ class PublicTripsController {
         if (tripService.findTripById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(tripService.findTripById(id), HttpStatus.OK);
+        return new ResponseEntity(tripService.findTripById(id), HttpStatus.OK);
     }
 }

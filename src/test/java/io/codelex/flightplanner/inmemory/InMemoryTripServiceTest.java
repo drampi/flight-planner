@@ -1,4 +1,4 @@
-package io.codelex.flightplanner;
+package io.codelex.flightplanner.inmemory;
 
 import io.codelex.flightplanner.api.AddTripRequest;
 import io.codelex.flightplanner.api.Airport;
@@ -11,8 +11,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TripServiceTest {
-    TripService service = new TripService();
+public class InMemoryTripServiceTest {
+    InMemoryTripService service = new InMemoryTripService();
 
     @Test
     public void should_be_able_to_add_flight() {
