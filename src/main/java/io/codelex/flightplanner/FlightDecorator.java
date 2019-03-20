@@ -31,7 +31,8 @@ class FlightDecorator {
                 to,
                 trip.getCarrier(),
                 trip.getDepartureTime(),
-                trip.getArrivalTime()
+                trip.getArrivalTime(),
+                weather
         );
     }
 }

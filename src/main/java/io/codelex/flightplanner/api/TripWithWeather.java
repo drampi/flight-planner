@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class TripWithWeather extends Trip{
     
+    private final Weather weather;
     @JsonCreator
     public TripWithWeather(@JsonProperty("id") Long id, 
                            @JsonProperty("from") Airport from, 
@@ -16,6 +17,10 @@ public class TripWithWeather extends Trip{
                            @JsonProperty("arrivalTime") LocalDateTime arrivalTime,
                            @JsonProperty("weather") Weather weather){
         super(id, from, to, carrier, departureTime, arrivalTime);
+        this.weather = weather;
     }
-    
+
+    public Weather getWeather() {
+        return weather;
+    }
 }
