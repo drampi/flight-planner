@@ -16,7 +16,9 @@ public class WeatherGateway {
                                  LocalDate date) {
         String formattedDate = date.format(DateTimeFormatter.ISO_DATE);
         String url = "https://api.apixu.com/v1/forecast.json?key=00ab253837da498b9bc150014190903&q=" + city + "&dt=" + formattedDate;
-        ForecastResponse response = restTemplate.getForObject(url, ForecastResponse.class);
+        ForecastResponse response = 
+                restTemplate.getForObject(url, 
+                        ForecastResponse.class);
         
         Day day = response.getForecast()
                 .getForecastDays().get(0).getDay();
