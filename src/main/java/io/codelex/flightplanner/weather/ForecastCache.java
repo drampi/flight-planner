@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import static java.util.concurrent.TimeUnit.HOURS;
 
 @Component
-class ForecastCache {
+public class ForecastCache {
     private final WeatherGateway gateway;
     
     private final Cache<CacheKey, Weather> cache 

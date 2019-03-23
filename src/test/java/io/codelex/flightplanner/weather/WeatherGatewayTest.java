@@ -12,12 +12,14 @@ class WeatherGatewayTest {
     
     @Test
     void fetchForecast() {
+        //given
         Weather weather = weatherGateway.fetchForecast("Riga", LocalDate.now());
-
+        //when
         System.out.println(weather.getCondition());
         System.out.println(weather.getTemperature() + " Celsius");
         System.out.println(weather.getWindSpeed() + " km/h");
         System.out.println(weather.getPrecipitation() + " milimeters of rain");
+        //then
         assertTrue(!weather.getCondition().isEmpty());
     }
 }

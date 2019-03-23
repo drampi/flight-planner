@@ -1,6 +1,7 @@
 package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.api.*;
+import io.codelex.flightplanner.weather.ForecastCache;
 import io.codelex.flightplanner.weather.WeatherGateway;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +10,16 @@ import java.util.stream.Collectors;
 
 @Component
 class FlightDecorator {
-    private TripService tripService;
-    private WeatherGateway weatherGateway;
-    
-    List<Trip> findTrip(FindTripRequest request) {
+    private final TripService tripService;
+    private final ForecastCache forecastCache;
+
+    FlightDecorator(TripService tripService,
+                    ForecastCache forecastCache) {
+        this.tripService = tripService;
+        this.forecastCache = forecastCache;
+    }
+
+    List<TripWithWeather> findTrip(FindTripRequest request) {
         return tripService.findTrip(request)
                 .stream()
                 .map(trip -> decorate(trip))
@@ -21,7 +28,7 @@ class FlightDecorator {
     
     private TripWithWeather decorate(Trip trip) {
         Airport to = trip.getTo();
-        Weather weather = weatherGateway.fetchForecast(
+        Weather weather = forecastCache.fetchForecast(
                 to.getCity(),
                 trip.getArrivalTime().toLocalDate()
         );

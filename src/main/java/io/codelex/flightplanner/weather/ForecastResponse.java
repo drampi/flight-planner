@@ -8,7 +8,7 @@ import java.util.List;
 public class ForecastResponse {
     private final Forecast forecast;
 
-    public Forecast getForecast() {
+    Forecast getForecast() {
         return forecast;
     }
 
@@ -20,7 +20,7 @@ public class ForecastResponse {
     public static class Forecast {
         private final List<ForecastDay> forecastDays;
 
-        public List<ForecastDay> getForecastDays() {
+        List<ForecastDay> getForecastDays() {
             return forecastDays;
         }
         @JsonCreator
@@ -37,7 +37,7 @@ public class ForecastResponse {
             this.day = day;
         }
 
-        public Day getDay() {
+        Day getDay() {
             return day;
         }
     }
@@ -51,19 +51,19 @@ public class ForecastResponse {
         private final int totalPrecipitation;
         private final Condition condition;
 
-        public double getAverageTemperature() {
+        double getAverageTemperature() {
             return averageTemperature;
         }
 
-        public double getMaxWind() {
+        double getMaxWind() {
             return maxWind;
         }
 
-        public int getTotalPrecipitation() {
+        int getTotalPrecipitation() {
             return totalPrecipitation;
         }
 
-        public Condition getCondition() {
+        Condition getCondition() {
             return condition;
         }
 
@@ -87,7 +87,7 @@ public class ForecastResponse {
             this.text = text;
         }
 
-        public String getText() {
+        String getText() {
             return text;
         }
     }
