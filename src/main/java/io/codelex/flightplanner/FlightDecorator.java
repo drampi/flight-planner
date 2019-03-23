@@ -2,10 +2,10 @@ package io.codelex.flightplanner;
 
 import io.codelex.flightplanner.api.*;
 import io.codelex.flightplanner.weather.ForecastCache;
-import io.codelex.flightplanner.weather.WeatherGateway;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,7 +28,7 @@ class FlightDecorator {
     
     private TripWithWeather decorate(Trip trip) {
         Airport to = trip.getTo();
-        Weather weather = forecastCache.fetchForecast(
+        Optional<Weather> weather = forecastCache.fetchForecast(
                 to.getCity(),
                 trip.getArrivalTime().toLocalDate()
         );
@@ -39,7 +39,7 @@ class FlightDecorator {
                 trip.getCarrier(),
                 trip.getDepartureTime(),
                 trip.getArrivalTime(),
-                weather
+                weather.orElse(null)
         );
     }
 }

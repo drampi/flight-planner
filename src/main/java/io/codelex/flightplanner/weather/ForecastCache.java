@@ -6,6 +6,7 @@ import io.codelex.flightplanner.api.Weather;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static java.util.concurrent.TimeUnit.HOURS;
 
@@ -22,16 +23,17 @@ public class ForecastCache {
         this.gateway = gateway;
     }
 
-    public Weather fetchForecast(String city,
-                                 LocalDate date) {
+    public Optional<Weather> fetchForecast(String city,
+                                          LocalDate date) {
         CacheKey key = new CacheKey(city, date);
         Weather weather = cache.getIfPresent(key);
         if (weather != null) {
-            return weather;
+            return Optional.of(weather);
         }
-        weather = gateway.fetchForecast(city, date);
-        cache.put(key, weather);
-        return weather;
+        Optional<Weather> response = gateway.fetchForecast(city, date);
+        
+        response.ifPresent(it -> cache.put(key, it));
+        return response;
     }
     
     
