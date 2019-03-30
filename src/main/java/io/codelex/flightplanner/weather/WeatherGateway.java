@@ -19,30 +19,35 @@ import static java.util.Optional.*;
 public class WeatherGateway {
     private static final Logger log =
             LoggerFactory.getLogger(WeatherGateway.class);
-    
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final ApixuProperties props;
 
     public WeatherGateway(ApixuProperties props) {
         this.props = props;
     }
-    
-    public Optional<Weather> fetchForecast(String city,
-                                           LocalDate date) {
-        try {
-        String formattedDate = date.format(DateTimeFormatter.ISO_DATE);
 
-        URI uri = UriComponentsBuilder.fromHttpUrl(props.getApiUrl())
-                .path("/v1/forecast.json")
-                .queryParam("key", props.getApiKey())
-                .queryParam("q", city)
-                .queryParam("dt", formattedDate)
-                .build()
-                .toUri();
+    Optional<Weather> fetchForecast(String city,
+                                    LocalDate date) {
+        try {
+            String formattedDate = date.format(DateTimeFormatter.ISO_DATE);
+
+            URI uri = UriComponentsBuilder.fromHttpUrl(props.getApiUrl())
+                    .path("/v1/forecast.json")
+                    .queryParam("key", props.getApiKey())
+                    .queryParam("q", city)
+                    .queryParam("dt", formattedDate)
+                    .build()
+                    .toUri();
        
             ForecastResponse response =
                     restTemplate.getForObject(uri,
                             ForecastResponse.class);
+
+            if (response == null) {
+                throw new IllegalStateException();
+            }
+
             Day day = response.getForecast()
                     .getForecastDays().get(0).getDay();
             return of(new Weather(
