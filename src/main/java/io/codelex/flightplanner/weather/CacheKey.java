@@ -13,14 +13,6 @@ class CacheKey {
         this.date = date;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

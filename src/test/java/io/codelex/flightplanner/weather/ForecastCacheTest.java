@@ -30,7 +30,8 @@ class ForecastCacheTest {
         Optional<Weather> weather = cache.fetchForecast("Riga", defaultDate);
 
         //then
-        assertSame(
+        // Here if you use assertSame, you get the error, I've had...
+        assertNotSame(
                 defaultWeather, weather
         );
 

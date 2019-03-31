@@ -21,14 +21,15 @@ class WeatherGatewayTest {
     @Rule
     WireMockRule wireMock = new WireMockRule();
     
-    WeatherGateway gateway;
+    private WeatherGateway gateway;
     
     LocalDate date = LocalDate.of(2019, 3, 23);
     
     @BeforeEach
     void setUp() {
-        wireMock.start();
-
+        if (!wireMock.isRunning()) {
+            wireMock.start();
+        }
         ApixuProperties props = new ApixuProperties();
         props.setApiUrl("http://localhost:" + wireMock.port());
         props.setApiKey("123");
