@@ -1,6 +1,5 @@
 package io.codelex.flightplanner.repository.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,9 +12,6 @@ public class AirportRecord {
     private String airport;
     private String city;
     private String country;
-
-    public AirportRecord() {
-    }
 
     public AirportRecord(String airport, String city, String country) {
         this.airport = airport;

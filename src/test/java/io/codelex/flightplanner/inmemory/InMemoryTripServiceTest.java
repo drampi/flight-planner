@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class InMemoryTripServiceTest {
-    InMemoryTripService service = new InMemoryTripService();
+    private InMemoryTripService service = new InMemoryTripService();
 
     @Test
     public void should_be_able_to_add_flight() {
