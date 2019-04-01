@@ -3,6 +3,7 @@ package io.codelex.flightplanner.weather;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import io.codelex.flightplanner.api.Weather;
 import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.ResourceUtils;
@@ -17,24 +18,27 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherGatewayTest {
-    
+
     @Rule
     WireMockRule wireMock = new WireMockRule();
-    
+
     private WeatherGateway gateway;
-    
-    LocalDate date = LocalDate.of(2019, 3, 23);
-    
+
+    private LocalDate date = LocalDate.of(2019, 3, 23);
+
     @BeforeEach
     void setUp() {
-        if (!wireMock.isRunning()) {
-            wireMock.start();
-        }
+        wireMock.start();
         ApixuProperties props = new ApixuProperties();
         props.setApiUrl("http://localhost:" + wireMock.port());
         props.setApiKey("123");
-        
+
         gateway = new WeatherGateway(props);
+    }
+
+    @AfterEach
+    void stop() {
+        wireMock.stop();
     }
     
     @Test
@@ -45,16 +49,16 @@ class WeatherGatewayTest {
         assertTrue(file.exists());
 
         byte[] json = Files.readAllBytes(file.toPath());
-        
+
         wireMock.stubFor(get(urlPathEqualTo("/v1/forecast.json"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withStatus(200)
                         .withBody(json)));
-        
+
         //when
         Weather weather = gateway.fetchForecast("Riga", date).get();
-        
+
         //then
         assertEquals(
                 "Moderate or heavy rain shower",
@@ -79,7 +83,7 @@ class WeatherGatewayTest {
 
         //when
         Optional<Weather> response = gateway.fetchForecast("Riga", date);
-        
+
         //then
         assertFalse(response.isPresent());
     }

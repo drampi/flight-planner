@@ -12,13 +12,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ForecastCacheTest {
-    WeatherGateway gateway = mock(WeatherGateway.class);
+    private WeatherGateway gateway = mock(WeatherGateway.class);
 
-    ForecastCache cache = new ForecastCache(gateway);
+    private ForecastCache cache = new ForecastCache(gateway);
 
-    LocalDate defaultDate = LocalDate.of(2019, 1, 1);
+    private LocalDate defaultDate = LocalDate.of(2019, 1, 1);
 
-    Weather defaultWeather = new Weather(0, 0, 0, "Snow");
+    private Weather defaultWeather = new Weather(0, 0, 0, "Snow");
 
     @Test
     void should_skip_the_cache_if_nothing_present() {
@@ -27,15 +27,13 @@ class ForecastCacheTest {
                 .thenReturn(Optional.ofNullable(defaultWeather));
 
         //when
-        Optional<Weather> weather = cache.fetchForecast("Riga", defaultDate);
+        Weather weather = cache.fetchForecast("Riga", defaultDate).get();
 
         //then
-        // Here if you use assertSame, you get the error, I've had...
-        assertNotSame(
+        assertSame(
                 defaultWeather, weather
         );
-
-
+        
         assertEquals(
                 "Snow", defaultWeather.getCondition()
         );

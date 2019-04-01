@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +34,7 @@ class FlightDecoratorTest {
                 defaultDate,
                 defaultDate.plusDays(1)
         );
-        List<Trip> tripsFromService = Arrays.asList(
+        List<Trip> tripsFromService = Collections.singletonList(
                 new Trip(
                         1L,
                         new Airport("LV", "Riga", "RIX"),
